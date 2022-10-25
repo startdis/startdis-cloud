@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.startdis.common.core.spring.SpringProperties,\
+  com.startdis.common.core.spring.SpringBeans
+
+  

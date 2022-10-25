@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.SocialUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.SocialUser">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="social_type" property="socialType" />
+        <result column="social_open_id" property="socialOpenId" />
+        <result column="social_token" property="socialToken" />
+        <result column="raw_token_info" property="rawTokenInfo" />
+        <result column="raw_user_info" property="rawUserInfo" />
+        <result column="nick_name" property="nickName" />
+        <result column="user_avatar" property="userAvatar" />
+        <result column="social_code" property="socialCode" />
+        <result column="social_state" property="socialState" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        social_type, social_open_id, social_token, raw_token_info, raw_user_info, nick_name, user_avatar, social_code, social_state, status, deleted, tenant_id
+    </sql>
+
+</mapper>

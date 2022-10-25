@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.ErrorCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.ErrorCode">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="application_id" property="applicationId" />
+        <result column="application_name" property="applicationName" />
+        <result column="error_type" property="errorType" />
+        <result column="error_code" property="errorCode" />
+        <result column="error_message" property="errorMessage" />
+        <result column="error_remark" property="errorRemark" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        application_id, application_name, error_type, error_code, error_message, error_remark, status, deleted, tenant_id
+    </sql>
+
+</mapper>

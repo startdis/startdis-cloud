@@ -1,0 +1,10 @@
+2022-10-21 15:47:42 [main] INFO  c.a.n.client.config.impl.LocalConfigInfoProcessor --> LOCAL_SNAPSHOT_PATH:C:\Users\DianJiu\nacos\config
+2022-10-21 15:47:42 [main] INFO  com.alibaba.nacos.client.config.utils.JvmUtil --> isMultiInstance:false
+2022-10-21 15:47:42 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder --> Ignore the empty nacos configuration and get it based on dataId[system-web] & group[dev]
+2022-10-21 15:47:42 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder --> Ignore the empty nacos configuration and get it based on dataId[system-web.yaml] & group[dev]
+2022-10-21 15:47:42 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration --> Located property source: [BootstrapPropertySource {name='bootstrapProperties-system-web-dev.yaml,dev'}, BootstrapPropertySource {name='bootstrapProperties-system-web.yaml,dev'}, BootstrapPropertySource {name='bootstrapProperties-system-web,dev'}, BootstrapPropertySource {name='bootstrapProperties-application-dev.yaml,dev'}]
+2022-10-21 15:51:39 [main] INFO  c.a.n.client.config.impl.LocalConfigInfoProcessor --> LOCAL_SNAPSHOT_PATH:C:\Users\DianJiu\nacos\config
+2022-10-21 15:51:39 [main] INFO  com.alibaba.nacos.client.config.utils.JvmUtil --> isMultiInstance:false
+2022-10-21 15:51:39 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder --> Ignore the empty nacos configuration and get it based on dataId[system-web] & group[dev]
+2022-10-21 15:51:39 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder --> Ignore the empty nacos configuration and get it based on dataId[system-web.yaml] & group[dev]
+2022-10-21 15:51:39 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration --> Located property source: [BootstrapPropertySource {name='bootstrapProperties-system-web-dev.yaml,dev'}, BootstrapPropertySource {name='bootstrapProperties-system-web.yaml,dev'}, BootstrapPropertySource {name='bootstrapProperties-system-web,dev'}, BootstrapPropertySource {name='bootstrapProperties-application-dev.yaml,dev'}]

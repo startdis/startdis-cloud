@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.Menu">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="parent_id" property="parentId" />
+        <result column="menu_code" property="menuCode" />
+        <result column="menu_name" property="menuName" />
+        <result column="menu_type" property="menuType" />
+        <result column="menu_path" property="menuPath" />
+        <result column="menu_icon" property="menuIcon" />
+        <result column="menu_component" property="menuComponent" />
+        <result column="menu_sort" property="menuSort" />
+        <result column="menu_permission" property="menuPermission" />
+        <result column="keep_alive" property="keepAlive" />
+        <result column="visible" property="visible" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        parent_id, menu_code, menu_name, menu_type, menu_path, menu_icon, menu_component, menu_sort, menu_permission, keep_alive, visible, status, deleted, tenant_id
+    </sql>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.Role">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="role_code" property="roleCode" />
+        <result column="role_name" property="roleName" />
+        <result column="role_remark" property="roleRemark" />
+        <result column="role_type" property="roleType" />
+        <result column="role_sort" property="roleSort" />
+        <result column="role_scope" property="roleScope" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        role_code, role_name, role_remark, role_type, role_sort, role_scope, status, deleted, tenant_id
+    </sql>
+
+</mapper>

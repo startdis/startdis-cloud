@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.CompanyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.Company">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="parent_id" property="parentId" />
+        <result column="company_code" property="companyCode" />
+        <result column="company_name" property="companyName" />
+        <result column="leader_user_id" property="leaderUserId" />
+        <result column="leader_user_name" property="leaderUserName" />
+        <result column="company_sort" property="companySort" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        parent_id, company_code, company_name, leader_user_id, leader_user_name, company_sort, phone, email, status, deleted, tenant_id
+    </sql>
+
+</mapper>

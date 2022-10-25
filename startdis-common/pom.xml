@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>startdis-common</artifactId>
+    <name>startdis-common</name>
+    <description>startdis-common</description>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>com.startdis</groupId>
+        <artifactId>startdis-cloud</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modules>
+        <module>common-core</module>
+        <module>common-util</module>
+        <module>common-jdbc</module>
+        <module>common-domain</module>
+        <module>common-exception</module>
+        <module>common-feign</module>
+        <module>common-thread</module>
+        <module>common-redis</module>
+        <module>common-swagger</module>
+        <module>common-job</module>
+        <module>common-log</module>
+        <module>common-saprfc</module>
+        <module>common-webservice</module>
+        <module>common-websocket</module>
+        <module>common-file-minio</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

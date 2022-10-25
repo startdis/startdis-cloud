@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.system.infra.mapper.OperateLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.system.domain.model.entity.OperateLog">
+        <result column="id" property="id" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="trace_id" property="traceId" />
+        <result column="user_id" property="userId" />
+        <result column="user_type" property="userType" />
+        <result column="user_ip" property="userIp" />
+        <result column="user_agent" property="userAgent" />
+        <result column="system_module" property="systemModule" />
+        <result column="operate_name" property="operateName" />
+        <result column="operate_type" property="operateType" />
+        <result column="operate_content" property="operateContent" />
+        <result column="operate_at" property="operateAt" />
+        <result column="cost_time" property="costTime" />
+        <result column="operate_exts" property="operateExts" />
+        <result column="request_method" property="requestMethod" />
+        <result column="request_url" property="requestUrl" />
+        <result column="request_body" property="requestBody" />
+        <result column="response_code" property="responseCode" />
+        <result column="response_msg" property="responseMsg" />
+        <result column="response_data" property="responseData" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="tenant_id" property="tenantId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        revision,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        trace_id, user_id, user_type, user_ip, user_agent, system_module, operate_name, operate_type, operate_content, operate_at, cost_time, operate_exts, request_method, request_url, request_body, response_code, response_msg, response_data, status, deleted, tenant_id
+    </sql>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.common.log.mapper.SystemLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.startdis.common.log.entity.SystemLog">
+        <result column="id" property="id" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="role_name" property="roleName" />
+        <result column="system_module" property="systemModule" />
+        <result column="business_type" property="businessType" />
+        <result column="business_no" property="businessNo" />
+        <result column="request_url" property="requestUrl" />
+        <result column="request_desc" property="requestDesc" />
+        <result column="request_body" property="requestBody" />
+        <result column="request_ip" property="requestIp" />
+        <result column="request_type" property="requestType" />
+        <result column="content_type" property="contentType" />
+        <result column="user_agent" property="userAgent" />
+        <result column="request_time" property="requestTime" />
+        <result column="response_body" property="responseBody" />
+        <result column="response_time" property="responseTime" />
+        <result column="consum_time" property="consumTime" />
+        <result column="error_info" property="errorInfo" />
+        <result column="revision" property="revision" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        created_by,
+        created_at,
+        updated_by,
+        updated_at,
+        user_id, user_name, role_name, system_module, business_type, business_no, request_url, request_desc, request_body, request_ip, request_type, content_type, user_agent, request_time, response_body, response_time, consum_time, error_info, revision, is_deleted
+    </sql>
+
+</mapper>
