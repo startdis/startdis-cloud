@@ -1,9 +1,9 @@
 package com.startdis.system.server.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.startdis.system.domain.model.entity.SensitiveWord;
 import com.startdis.system.infra.mapper.SensitiveWordMapper;
 import com.startdis.system.server.service.SensitiveWordService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

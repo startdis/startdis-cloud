@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.DictItemConverter;
 import com.startdis.system.domain.model.dto.DictItemPostDTO;
 import com.startdis.system.domain.model.dto.DictItemPutDTO;
 import com.startdis.system.domain.model.entity.DictItem;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.DictItemVO;
 import com.startdis.system.server.service.DictItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class DictItemController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<DictItemVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        DictItemVO dictItemVO = new DictItemVO();
         DictItem dictItem = dictItemService.getById(id);
-        BeanUtils.copyProperties(dictItem, dictItemVO);
+        //处理格式转换
+        DictItemVO dictItemVO = DictItemConverter.INSTANT.entityToVO(dictItem);
         return ResultBean.success(dictItemVO);
     }
     
@@ -75,9 +75,8 @@ public class DictItemController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<DictItemVO>> list(DictItemQuery dictItemQuery) {
-        //处理查询条件
-        DictItem dictItem = new DictItem();
-        BeanUtils.copyProperties(dictItemQuery, dictItem);
+        //处理格式转换
+        DictItem dictItem = DictItemConverter.INSTANT.queryToEntity(dictItemQuery);
         //执行分页查询
         List<DictItem> listResult = dictItemService.list(new QueryWrapper<>(dictItem));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, DictItemVO.class));
@@ -95,9 +94,8 @@ public class DictItemController {
     public ResultBean<PagerBean<DictItemVO>> page(PageQuery pageQuery, DictItemQuery dictItemQuery) {
         //处理分页条件
         Page<DictItem> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        DictItem dictItem = new DictItem();
-        BeanUtils.copyProperties(dictItemQuery, dictItem);
+        //处理格式转换
+        DictItem dictItem = DictItemConverter.INSTANT.queryToEntity(dictItemQuery);
         //执行分页查询
         Page<DictItem> pageResult = dictItemService.page(page, new QueryWrapper<>(dictItem));
         PagerBean<DictItemVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class DictItemController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated DictItemPostDTO dictItemDTO) {
-        DictItem dictItem = new DictItem();
-        BeanUtils.copyProperties(dictItemDTO, dictItem);
+        //处理格式转换
+        DictItem dictItem = DictItemConverter.INSTANT.postDtoToEntity(dictItemDTO);
+        //执行数据保存
         return ResultBean.success(dictItemService.save(dictItem));
     }
     
@@ -128,8 +127,9 @@ public class DictItemController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated DictItemPutDTO dictItemDTO) {
-        DictItem dictItem = new DictItem();
-        BeanUtils.copyProperties(dictItemDTO, dictItem);
+        //处理格式转换
+        DictItem dictItem = DictItemConverter.INSTANT.putDtoToEntity(dictItemDTO);
+        //执行数据更新
         return ResultBean.success(dictItemService.updateById(dictItem));
     }
     

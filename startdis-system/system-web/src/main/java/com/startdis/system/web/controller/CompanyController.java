@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.CompanyConverter;
 import com.startdis.system.domain.model.dto.CompanyPostDTO;
 import com.startdis.system.domain.model.dto.CompanyPutDTO;
 import com.startdis.system.domain.model.entity.Company;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.CompanyVO;
 import com.startdis.system.server.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class CompanyController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<CompanyVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        CompanyVO companyVO = new CompanyVO();
         Company company = companyService.getById(id);
-        BeanUtils.copyProperties(company, companyVO);
+        //处理格式转换
+        CompanyVO companyVO = CompanyConverter.INSTANT.entityToVO(company);
         return ResultBean.success(companyVO);
     }
     
@@ -75,9 +75,8 @@ public class CompanyController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<CompanyVO>> list(CompanyQuery companyQuery) {
-        //处理查询条件
-        Company company = new Company();
-        BeanUtils.copyProperties(companyQuery, company);
+        //处理格式转换
+        Company company = CompanyConverter.INSTANT.queryToEntity(companyQuery);
         //执行分页查询
         List<Company> listResult = companyService.list(new QueryWrapper<>(company));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, CompanyVO.class));
@@ -95,9 +94,8 @@ public class CompanyController {
     public ResultBean<PagerBean<CompanyVO>> page(PageQuery pageQuery, CompanyQuery companyQuery) {
         //处理分页条件
         Page<Company> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        Company company = new Company();
-        BeanUtils.copyProperties(companyQuery, company);
+        //处理格式转换
+        Company company = CompanyConverter.INSTANT.queryToEntity(companyQuery);
         //执行分页查询
         Page<Company> pageResult = companyService.page(page, new QueryWrapper<>(company));
         PagerBean<CompanyVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class CompanyController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated CompanyPostDTO companyDTO) {
-        Company company = new Company();
-        BeanUtils.copyProperties(companyDTO, company);
+        //处理格式转换
+        Company company = CompanyConverter.INSTANT.postDtoToEntity(companyDTO);
+        //执行数据保存
         return ResultBean.success(companyService.save(company));
     }
     
@@ -128,8 +127,9 @@ public class CompanyController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated CompanyPutDTO companyDTO) {
-        Company company = new Company();
-        BeanUtils.copyProperties(companyDTO, company);
+        //处理格式转换
+        Company company = CompanyConverter.INSTANT.putDtoToEntity(companyDTO);
+        //执行数据更新
         return ResultBean.success(companyService.updateById(company));
     }
     

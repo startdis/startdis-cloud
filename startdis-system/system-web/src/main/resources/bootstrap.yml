@@ -6,8 +6,8 @@ spring:
   application:
     name: system-web
   profiles:
-    # active: local
-    active: dev
+    active: local
+  #    active: dev
   cloud:
     # nacos
     nacos:
@@ -16,14 +16,14 @@ spring:
       password: Startdis2022
       discovery:
         # 配置中心的地址
-        # erver-addr: ${NACOS_HOST:192.168.1.31}:${NACOS_PORT:8848}
-        server-addr: ${NACOS_HOST:10.0.0.14}:${NACOS_PORT:8848}
+        server-addr: ${NACOS_HOST:192.168.1.31}:${NACOS_PORT:8848}
+        # server-addr: ${NACOS_HOST:10.0.0.14}:${NACOS_PORT:8848}
         #命名空间
-        #namespace: ${spring.profiles.active:local}
-        namespace: ${spring.profiles.active:dev}
+        namespace: ${spring.profiles.active:local}
+        # namespace: ${spring.profiles.active:dev}
         # 配置文件的环境
-        #group: ${SERVICE_DISCOVERY_GROUP_NAME:local}
-        group: ${SERVICE_DISCOVERY_GROUP_NAME:dev}
+        group: ${SERVICE_DISCOVERY_GROUP_NAME:local}
+        # group: ${SERVICE_DISCOVERY_GROUP_NAME:dev}
       # 配置中心
       config:
         # 配置中心的地址

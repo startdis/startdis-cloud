@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.SocialUserConverter;
 import com.startdis.system.domain.model.dto.SocialUserPostDTO;
 import com.startdis.system.domain.model.dto.SocialUserPutDTO;
 import com.startdis.system.domain.model.entity.SocialUser;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.SocialUserVO;
 import com.startdis.system.server.service.SocialUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class SocialUserController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<SocialUserVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        SocialUserVO socialUserVO = new SocialUserVO();
         SocialUser socialUser = socialUserService.getById(id);
-        BeanUtils.copyProperties(socialUser, socialUserVO);
+        //处理格式转换
+        SocialUserVO socialUserVO = SocialUserConverter.INSTANT.entityToVO(socialUser);
         return ResultBean.success(socialUserVO);
     }
     
@@ -75,9 +75,8 @@ public class SocialUserController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<SocialUserVO>> list(SocialUserQuery socialUserQuery) {
-        //处理查询条件
-        SocialUser socialUser = new SocialUser();
-        BeanUtils.copyProperties(socialUserQuery, socialUser);
+        //处理格式转换
+        SocialUser socialUser = SocialUserConverter.INSTANT.queryToEntity(socialUserQuery);
         //执行分页查询
         List<SocialUser> listResult = socialUserService.list(new QueryWrapper<>(socialUser));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, SocialUserVO.class));
@@ -95,9 +94,8 @@ public class SocialUserController {
     public ResultBean<PagerBean<SocialUserVO>> page(PageQuery pageQuery, SocialUserQuery socialUserQuery) {
         //处理分页条件
         Page<SocialUser> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        SocialUser socialUser = new SocialUser();
-        BeanUtils.copyProperties(socialUserQuery, socialUser);
+        //处理格式转换
+        SocialUser socialUser = SocialUserConverter.INSTANT.queryToEntity(socialUserQuery);
         //执行分页查询
         Page<SocialUser> pageResult = socialUserService.page(page, new QueryWrapper<>(socialUser));
         PagerBean<SocialUserVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class SocialUserController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated SocialUserPostDTO socialUserDTO) {
-        SocialUser socialUser = new SocialUser();
-        BeanUtils.copyProperties(socialUserDTO, socialUser);
+        //处理格式转换
+        SocialUser socialUser = SocialUserConverter.INSTANT.postDtoToEntity(socialUserDTO);
+        //执行数据保存
         return ResultBean.success(socialUserService.save(socialUser));
     }
     
@@ -128,8 +127,9 @@ public class SocialUserController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated SocialUserPutDTO socialUserDTO) {
-        SocialUser socialUser = new SocialUser();
-        BeanUtils.copyProperties(socialUserDTO, socialUser);
+        //处理格式转换
+        SocialUser socialUser = SocialUserConverter.INSTANT.putDtoToEntity(socialUserDTO);
+        //执行数据更新
         return ResultBean.success(socialUserService.updateById(socialUser));
     }
     

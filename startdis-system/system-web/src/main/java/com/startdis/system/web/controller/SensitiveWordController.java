@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.SensitiveWordConverter;
 import com.startdis.system.domain.model.dto.SensitiveWordPostDTO;
 import com.startdis.system.domain.model.dto.SensitiveWordPutDTO;
 import com.startdis.system.domain.model.entity.SensitiveWord;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.SensitiveWordVO;
 import com.startdis.system.server.service.SensitiveWordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class SensitiveWordController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<SensitiveWordVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        SensitiveWordVO sensitiveWordVO = new SensitiveWordVO();
         SensitiveWord sensitiveWord = sensitiveWordService.getById(id);
-        BeanUtils.copyProperties(sensitiveWord, sensitiveWordVO);
+        //处理格式转换
+        SensitiveWordVO sensitiveWordVO = SensitiveWordConverter.INSTANT.entityToVO(sensitiveWord);
         return ResultBean.success(sensitiveWordVO);
     }
     
@@ -75,9 +75,8 @@ public class SensitiveWordController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<SensitiveWordVO>> list(SensitiveWordQuery sensitiveWordQuery) {
-        //处理查询条件
-        SensitiveWord sensitiveWord = new SensitiveWord();
-        BeanUtils.copyProperties(sensitiveWordQuery, sensitiveWord);
+        //处理格式转换
+        SensitiveWord sensitiveWord = SensitiveWordConverter.INSTANT.queryToEntity(sensitiveWordQuery);
         //执行分页查询
         List<SensitiveWord> listResult = sensitiveWordService.list(new QueryWrapper<>(sensitiveWord));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, SensitiveWordVO.class));
@@ -95,9 +94,8 @@ public class SensitiveWordController {
     public ResultBean<PagerBean<SensitiveWordVO>> page(PageQuery pageQuery, SensitiveWordQuery sensitiveWordQuery) {
         //处理分页条件
         Page<SensitiveWord> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        SensitiveWord sensitiveWord = new SensitiveWord();
-        BeanUtils.copyProperties(sensitiveWordQuery, sensitiveWord);
+        //处理格式转换
+        SensitiveWord sensitiveWord = SensitiveWordConverter.INSTANT.queryToEntity(sensitiveWordQuery);
         //执行分页查询
         Page<SensitiveWord> pageResult = sensitiveWordService.page(page, new QueryWrapper<>(sensitiveWord));
         PagerBean<SensitiveWordVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class SensitiveWordController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated SensitiveWordPostDTO sensitiveWordDTO) {
-        SensitiveWord sensitiveWord = new SensitiveWord();
-        BeanUtils.copyProperties(sensitiveWordDTO, sensitiveWord);
+        //处理格式转换
+        SensitiveWord sensitiveWord = SensitiveWordConverter.INSTANT.postDtoToEntity(sensitiveWordDTO);
+        //执行数据保存
         return ResultBean.success(sensitiveWordService.save(sensitiveWord));
     }
     
@@ -128,8 +127,9 @@ public class SensitiveWordController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated SensitiveWordPutDTO sensitiveWordDTO) {
-        SensitiveWord sensitiveWord = new SensitiveWord();
-        BeanUtils.copyProperties(sensitiveWordDTO, sensitiveWord);
+        //处理格式转换
+        SensitiveWord sensitiveWord = SensitiveWordConverter.INSTANT.putDtoToEntity(sensitiveWordDTO);
+        //执行数据更新
         return ResultBean.success(sensitiveWordService.updateById(sensitiveWord));
     }
     

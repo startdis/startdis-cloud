@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.UsersConverter;
 import com.startdis.system.domain.model.dto.UsersPostDTO;
 import com.startdis.system.domain.model.dto.UsersPutDTO;
 import com.startdis.system.domain.model.entity.Users;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.UsersVO;
 import com.startdis.system.server.service.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class UsersController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<UsersVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        UsersVO usersVO = new UsersVO();
         Users users = usersService.getById(id);
-        BeanUtils.copyProperties(users, usersVO);
+        //处理格式转换
+        UsersVO usersVO = UsersConverter.INSTANT.entityToVO(users);
         return ResultBean.success(usersVO);
     }
     
@@ -75,9 +75,8 @@ public class UsersController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<UsersVO>> list(UsersQuery usersQuery) {
-        //处理查询条件
-        Users users = new Users();
-        BeanUtils.copyProperties(usersQuery, users);
+        //处理格式转换
+        Users users = UsersConverter.INSTANT.queryToEntity(usersQuery);
         //执行分页查询
         List<Users> listResult = usersService.list(new QueryWrapper<>(users));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, UsersVO.class));
@@ -95,9 +94,8 @@ public class UsersController {
     public ResultBean<PagerBean<UsersVO>> page(PageQuery pageQuery, UsersQuery usersQuery) {
         //处理分页条件
         Page<Users> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        Users users = new Users();
-        BeanUtils.copyProperties(usersQuery, users);
+        //处理格式转换
+        Users users = UsersConverter.INSTANT.queryToEntity(usersQuery);
         //执行分页查询
         Page<Users> pageResult = usersService.page(page, new QueryWrapper<>(users));
         PagerBean<UsersVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class UsersController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated UsersPostDTO usersDTO) {
-        Users users = new Users();
-        BeanUtils.copyProperties(usersDTO, users);
+        //处理格式转换
+        Users users = UsersConverter.INSTANT.postDtoToEntity(usersDTO);
+        //执行数据保存
         return ResultBean.success(usersService.save(users));
     }
     
@@ -128,8 +127,9 @@ public class UsersController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated UsersPutDTO usersDTO) {
-        Users users = new Users();
-        BeanUtils.copyProperties(usersDTO, users);
+        //处理格式转换
+        Users users = UsersConverter.INSTANT.putDtoToEntity(usersDTO);
+        //执行数据更新
         return ResultBean.success(usersService.updateById(users));
     }
     

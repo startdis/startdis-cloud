@@ -1,7 +1,7 @@
 package com.startdis.system.server.service;
 
-import com.startdis.system.domain.model.entity.SocialUserBind;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.startdis.system.domain.model.entity.SocialUserBind;
 
 /**
  * <p>

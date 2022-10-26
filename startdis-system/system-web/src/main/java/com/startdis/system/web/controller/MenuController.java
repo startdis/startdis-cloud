@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.MenuConverter;
 import com.startdis.system.domain.model.dto.MenuPostDTO;
 import com.startdis.system.domain.model.dto.MenuPutDTO;
 import com.startdis.system.domain.model.entity.Menu;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.MenuVO;
 import com.startdis.system.server.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class MenuController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<MenuVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        MenuVO menuVO = new MenuVO();
         Menu menu = menuService.getById(id);
-        BeanUtils.copyProperties(menu, menuVO);
+        //处理格式转换
+        MenuVO menuVO = MenuConverter.INSTANT.entityToVO(menu);
         return ResultBean.success(menuVO);
     }
     
@@ -75,9 +75,8 @@ public class MenuController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<MenuVO>> list(MenuQuery menuQuery) {
-        //处理查询条件
-        Menu menu = new Menu();
-        BeanUtils.copyProperties(menuQuery, menu);
+        //处理格式转换
+        Menu menu = MenuConverter.INSTANT.queryToEntity(menuQuery);
         //执行分页查询
         List<Menu> listResult = menuService.list(new QueryWrapper<>(menu));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, MenuVO.class));
@@ -95,9 +94,8 @@ public class MenuController {
     public ResultBean<PagerBean<MenuVO>> page(PageQuery pageQuery, MenuQuery menuQuery) {
         //处理分页条件
         Page<Menu> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        Menu menu = new Menu();
-        BeanUtils.copyProperties(menuQuery, menu);
+        //处理格式转换
+        Menu menu = MenuConverter.INSTANT.queryToEntity(menuQuery);
         //执行分页查询
         Page<Menu> pageResult = menuService.page(page, new QueryWrapper<>(menu));
         PagerBean<MenuVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class MenuController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated MenuPostDTO menuDTO) {
-        Menu menu = new Menu();
-        BeanUtils.copyProperties(menuDTO, menu);
+        //处理格式转换
+        Menu menu = MenuConverter.INSTANT.postDtoToEntity(menuDTO);
+        //执行数据保存
         return ResultBean.success(menuService.save(menu));
     }
     
@@ -128,8 +127,9 @@ public class MenuController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated MenuPutDTO menuDTO) {
-        Menu menu = new Menu();
-        BeanUtils.copyProperties(menuDTO, menu);
+        //处理格式转换
+        Menu menu = MenuConverter.INSTANT.putDtoToEntity(menuDTO);
+        //执行数据更新
         return ResultBean.success(menuService.updateById(menu));
     }
     

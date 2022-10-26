@@ -1,7 +1,7 @@
 package com.startdis.system.infra.mapper;
 
-import com.startdis.system.domain.model.entity.Post;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.startdis.system.domain.model.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

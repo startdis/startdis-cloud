@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.DeptConverter;
 import com.startdis.system.domain.model.dto.DeptPostDTO;
 import com.startdis.system.domain.model.dto.DeptPutDTO;
 import com.startdis.system.domain.model.entity.Dept;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.DeptVO;
 import com.startdis.system.server.service.DeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class DeptController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<DeptVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        DeptVO deptVO = new DeptVO();
         Dept dept = deptService.getById(id);
-        BeanUtils.copyProperties(dept, deptVO);
+        //处理格式转换
+        DeptVO deptVO = DeptConverter.INSTANT.entityToVO(dept);
         return ResultBean.success(deptVO);
     }
     
@@ -75,9 +75,8 @@ public class DeptController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<DeptVO>> list(DeptQuery deptQuery) {
-        //处理查询条件
-        Dept dept = new Dept();
-        BeanUtils.copyProperties(deptQuery, dept);
+        //处理格式转换
+        Dept dept = DeptConverter.INSTANT.queryToEntity(deptQuery);
         //执行分页查询
         List<Dept> listResult = deptService.list(new QueryWrapper<>(dept));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, DeptVO.class));
@@ -95,9 +94,8 @@ public class DeptController {
     public ResultBean<PagerBean<DeptVO>> page(PageQuery pageQuery, DeptQuery deptQuery) {
         //处理分页条件
         Page<Dept> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        Dept dept = new Dept();
-        BeanUtils.copyProperties(deptQuery, dept);
+        //处理格式转换
+        Dept dept = DeptConverter.INSTANT.queryToEntity(deptQuery);
         //执行分页查询
         Page<Dept> pageResult = deptService.page(page, new QueryWrapper<>(dept));
         PagerBean<DeptVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class DeptController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated DeptPostDTO deptDTO) {
-        Dept dept = new Dept();
-        BeanUtils.copyProperties(deptDTO, dept);
+        //处理格式转换
+        Dept dept = DeptConverter.INSTANT.postDtoToEntity(deptDTO);
+        //执行数据保存
         return ResultBean.success(deptService.save(dept));
     }
     
@@ -128,8 +127,9 @@ public class DeptController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated DeptPutDTO deptDTO) {
-        Dept dept = new Dept();
-        BeanUtils.copyProperties(deptDTO, dept);
+        //处理格式转换
+        Dept dept = DeptConverter.INSTANT.putDtoToEntity(deptDTO);
+        //执行数据更新
         return ResultBean.success(deptService.updateById(dept));
     }
     

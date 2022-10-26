@@ -8,6 +8,7 @@ import com.startdis.common.domain.bean.PagerBean;
 import com.startdis.common.domain.bean.ResultBean;
 import com.startdis.common.domain.model.PageQuery;
 import com.startdis.common.util.bean.BeanCopyUtils;
+import com.startdis.system.domain.model.converter.SocialUserBindConverter;
 import com.startdis.system.domain.model.dto.SocialUserBindPostDTO;
 import com.startdis.system.domain.model.dto.SocialUserBindPutDTO;
 import com.startdis.system.domain.model.entity.SocialUserBind;
@@ -16,7 +17,6 @@ import com.startdis.system.domain.model.vo.SocialUserBindVO;
 import com.startdis.system.server.service.SocialUserBindService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +60,9 @@ public class SocialUserBindController {
     @GetMapping("{id}")
     @ApiOperation("查询单条")
     public ResultBean<SocialUserBindVO> get(@PathVariable @Validated @NotBlank(message = "ID不能为空") String id) {
-        SocialUserBindVO socialUserBindVO = new SocialUserBindVO();
         SocialUserBind socialUserBind = socialUserBindService.getById(id);
-        BeanUtils.copyProperties(socialUserBind, socialUserBindVO);
+        //处理格式转换
+        SocialUserBindVO socialUserBindVO = SocialUserBindConverter.INSTANT.entityToVO(socialUserBind);
         return ResultBean.success(socialUserBindVO);
     }
     
@@ -75,9 +75,8 @@ public class SocialUserBindController {
     @GetMapping(value = "/list")
     @ApiOperation("查询所有")
     public ResultBean<List<SocialUserBindVO>> list(SocialUserBindQuery socialUserBindQuery) {
-        //处理查询条件
-        SocialUserBind socialUserBind = new SocialUserBind();
-        BeanUtils.copyProperties(socialUserBindQuery, socialUserBind);
+        //处理格式转换
+        SocialUserBind socialUserBind = SocialUserBindConverter.INSTANT.queryToEntity(socialUserBindQuery);
         //执行分页查询
         List<SocialUserBind> listResult = socialUserBindService.list(new QueryWrapper<>(socialUserBind));
         return ResultBean.success(BeanCopyUtils.coverList(listResult, SocialUserBindVO.class));
@@ -95,9 +94,8 @@ public class SocialUserBindController {
     public ResultBean<PagerBean<SocialUserBindVO>> page(PageQuery pageQuery, SocialUserBindQuery socialUserBindQuery) {
         //处理分页条件
         Page<SocialUserBind> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        //处理查询条件
-        SocialUserBind socialUserBind = new SocialUserBind();
-        BeanUtils.copyProperties(socialUserBindQuery, socialUserBind);
+        //处理格式转换
+        SocialUserBind socialUserBind = SocialUserBindConverter.INSTANT.queryToEntity(socialUserBindQuery);
         //执行分页查询
         Page<SocialUserBind> pageResult = socialUserBindService.page(page, new QueryWrapper<>(socialUserBind));
         PagerBean<SocialUserBindVO> pageBean = new PagerBean<>(pageResult.getTotal(), pageResult.getCurrent(),
@@ -114,8 +112,9 @@ public class SocialUserBindController {
     @PostMapping
     @ApiOperation("新增数据")
     public ResultBean<Boolean> insert(@RequestBody @Validated SocialUserBindPostDTO socialUserBindDTO) {
-        SocialUserBind socialUserBind = new SocialUserBind();
-        BeanUtils.copyProperties(socialUserBindDTO, socialUserBind);
+        //处理格式转换
+        SocialUserBind socialUserBind = SocialUserBindConverter.INSTANT.postDtoToEntity(socialUserBindDTO);
+        //执行数据保存
         return ResultBean.success(socialUserBindService.save(socialUserBind));
     }
     
@@ -128,8 +127,9 @@ public class SocialUserBindController {
     @PutMapping
     @ApiOperation("修改数据")
     public ResultBean<Boolean> update(@RequestBody @Validated SocialUserBindPutDTO socialUserBindDTO) {
-        SocialUserBind socialUserBind = new SocialUserBind();
-        BeanUtils.copyProperties(socialUserBindDTO, socialUserBind);
+        //处理格式转换
+        SocialUserBind socialUserBind = SocialUserBindConverter.INSTANT.putDtoToEntity(socialUserBindDTO);
+        //执行数据更新
         return ResultBean.success(socialUserBindService.updateById(socialUserBind));
     }
     

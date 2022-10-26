@@ -1,9 +1,9 @@
 package com.startdis.system.server.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.startdis.system.domain.model.entity.Menu;
 import com.startdis.system.infra.mapper.MenuMapper;
 import com.startdis.system.server.service.MenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
