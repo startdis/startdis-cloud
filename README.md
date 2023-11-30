@@ -1,5 +1,4 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">TDCD Cloud</h1>
-<h4 align="center">通电传导项目基于Startdis Cloud分布式微服务架构</h4>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Startdis Cloud</h1>
 
 ## 平台简介
 
