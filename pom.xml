@@ -5,7 +5,7 @@
     <groupId>com.startdis</groupId>
     <artifactId>startdis-cloud</artifactId>
     <name>startdis-cloud</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <description>startdis-cloud</description>
 
@@ -64,7 +64,7 @@
         <spring-boot.version>2.5.8</spring-boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
-        <startdis.version>1.0.0-SNAPSHOT</startdis.version>
+        <startdis.version>1.0.0</startdis.version>
         <swagger-io.version>2.2.10</swagger-io.version>
         <swagger-springfox.version>3.0.0</swagger-springfox.version>
         <trace.version>8.13.0</trace.version>

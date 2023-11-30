@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>comm-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${startdis.version}</version>
     <name>comm-core</name>
     <packaging>jar</packaging>
     <description>comm-core</description>
@@ -11,7 +11,7 @@
     <parent>
         <artifactId>startdis-comm</artifactId>
         <groupId>com.startdis.comm</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <distributionManagement>
