@@ -2,41 +2,55 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>comm-web</name>
     <artifactId>comm-web</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>comm-web</name>
+    <packaging>jar</packaging>
     <description>comm-web</description>
-    <version>${startdis.version}</version>
 
     <parent>
-        <groupId>com.startdis</groupId>
+        <groupId>com.startdis.comm</groupId>
         <artifactId>startdis-comm</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>release</name>
+            <url>https://nexus.njydsz.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>snapshot</name>
+            <url>https://nexus.njydsz.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <!-- common-core -->
         <dependency>
-            <groupId>com.startdis</groupId>
+            <groupId>com.startdis.comm</groupId>
             <artifactId>comm-core</artifactId>
         </dependency>
         <!-- common-util -->
         <dependency>
-            <groupId>com.startdis</groupId>
+            <groupId>com.startdis.comm</groupId>
             <artifactId>comm-util</artifactId>
         </dependency>
         <!--common-jdbc-->
         <dependency>
-            <groupId>com.startdis</groupId>
+            <groupId>com.startdis.comm</groupId>
             <artifactId>comm-jdbc</artifactId>
         </dependency>
         <!--common-redis-->
         <dependency>
-            <groupId>com.startdis</groupId>
+            <groupId>com.startdis.comm</groupId>
             <artifactId>comm-redis</artifactId>
         </dependency>
         <!--common-swagger-->
         <dependency>
-            <groupId>com.startdis</groupId>
+            <groupId>com.startdis.comm</groupId>
             <artifactId>comm-swagger</artifactId>
         </dependency>
         <!--spring-web-->

@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>comm-core</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>comm-core</name>
+    <packaging>jar</packaging>
+    <description>comm-core</description>
+
+    <parent>
+        <artifactId>startdis-comm</artifactId>
+        <groupId>com.startdis.comm</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>release</name>
+            <url>https://nexus.njydsz.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>snapshot</name>
+            <url>https://nexus.njydsz.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <!-- spring -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <groupId>org.springframework.boot</groupId>
+            <version>2.5.8</version>
         </dependency>
-        <!--<dependency>
-            <artifactId>spring-boot-autoconfigure-processor</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        </dependency>-->
-    
+
         <dependency>
             <artifactId>guava</artifactId>
             <groupId>com.google.guava</groupId>
         </dependency>
+
         <!-- 解析user-agent的包 -->
         <dependency>
             <artifactId>device-detector</artifactId>
@@ -28,16 +51,6 @@
             <groupId>org.projectlombok</groupId>
         </dependency>
     </dependencies>
-    <description>comm-core</description>
-    <modelVersion>4.0.0</modelVersion>
-    <name>comm-core</name>
 
-    <parent>
-        <artifactId>startdis-comm</artifactId>
-        <groupId>com.startdis</groupId>
-        <version>1.0.0</version>
-    </parent>
-
-    <version>${startdis.version}</version>
 
 </project>

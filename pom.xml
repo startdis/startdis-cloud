@@ -2,18 +2,16 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>startdis-cloud</name>
     <groupId>com.startdis</groupId>
     <artifactId>startdis-cloud</artifactId>
-    <description>startdis-cloud</description>
-    <version>1.0.0</version>
+    <name>startdis-cloud</name>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>startdis-cloud</description>
 
     <modules>
         <module>startdis-comm</module>
         <module>startdis-base</module>
-        <module>startdis-sys</module>
-        <module>startdis-sso</module>
     </modules>
 
     <properties>
@@ -22,7 +20,6 @@
         <cglib.version>3.3.0</cglib.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <commons-discovery.version>0.2</commons-discovery.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-logging.version>1.0.4</commons-logging.version>
@@ -36,8 +33,6 @@
         <druid.version>1.2.9</druid.version>
         <easyexcel.version>3.1.1</easyexcel.version>
         <fastjson.version>2.0.6</fastjson.version>
-        <activiti.version>7.1.0.M6</activiti.version>
-        <flowable.version>6.8.0</flowable.version>
         <gson.version>2.9.0</gson.version>
         <guava.version>31.1-jre</guava.version>
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
@@ -45,7 +40,6 @@
         <hutool.version>5.8.4</hutool.version>
         <jackson.version>2.13.3</jackson.version>
         <java-jwt.version>4.0.0</java-jwt.version>
-        <java-websocket.version>1.5.3</java-websocket.version>
         <java.version>11</java.version>
         <javax.version>4.0.1</javax.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
@@ -54,7 +48,7 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <lombok.version>1.18.24</lombok.version>
         <mail.version>1.4.7</mail.version>
-        <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <minio.version>8.4.3</minio.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mybatis.version>2.2.2</mybatis.version>
@@ -70,7 +64,7 @@
         <spring-boot.version>2.5.8</spring-boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
-        <startdis.version>1.0.0</startdis.version>
+        <startdis.version>1.0.0-SNAPSHOT</startdis.version>
         <swagger-io.version>2.2.10</swagger-io.version>
         <swagger-springfox.version>3.0.0</swagger-springfox.version>
         <trace.version>8.13.0</trace.version>
@@ -110,163 +104,137 @@
             <!--内部服务引用开始-->
             <!--核心依赖-->
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-core</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-domain</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-exception</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-feign</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-minio</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-jdbc</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-job</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-redis</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-swagger</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-thread</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-util</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-auth</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-safe</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.startdis.comm</groupId>
                 <artifactId>comm-web</artifactId>
-                <groupId>com.startdis</groupId>
                 <version>${startdis.version}</version>
             </dependency>
             <!--身份引擎-->
-            <dependency>
-                <groupId>com.startdis</groupId>
+            <!--<dependency>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-api</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-domain</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-infra</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-server</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-job</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-app</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sys</groupId>
                 <artifactId>sys-web</artifactId>
                 <version>${startdis.version}</version>
-            </dependency>
+            </dependency>-->
             <!--单点登录-->
-            <dependency>
-                <groupId>com.startdis</groupId>
+            <!--<dependency>
+                <groupId>com.startdis.sso</groupId>
                 <artifactId>sso-api</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sso</groupId>
                 <artifactId>sso-domain</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sso</groupId>
                 <artifactId>sso-infra</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sso</groupId>
                 <artifactId>sso-server</artifactId>
                 <version>${startdis.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.startdis</groupId>
+                <groupId>com.startdis.sso</groupId>
                 <artifactId>sso-web</artifactId>
                 <version>${startdis.version}</version>
-            </dependency>
-            <!--流程引擎-->
-            <dependency>
-                <groupId>com.startdis</groupId>
-                <artifactId>bpm-api</artifactId>
-                <version>${startdis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.startdis</groupId>
-                <artifactId>bpm-domain</artifactId>
-                <version>${startdis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.startdis</groupId>
-                <artifactId>bpm-infra</artifactId>
-                <version>${startdis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.startdis</groupId>
-                <artifactId>bpm-server</artifactId>
-                <version>${startdis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.startdis</groupId>
-                <artifactId>bpm-web</artifactId>
-                <version>${startdis.version}</version>
-            </dependency>
+            </dependency>-->
             <!--内部服务引用结束-->
 
             <!--数据库相关依赖开始-->
@@ -277,11 +245,6 @@
                 <version>${pagehelper.boot.version}</version>
             </dependency>
             <!-- mybatis-plus -->
-            <dependency>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <groupId>com.baomidou</groupId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
             <dependency>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <groupId>com.baomidou</groupId>
@@ -317,12 +280,12 @@
                 <version>${mysql.version}</version>
             </dependency>
             <!-- postgresql -->
-            <dependency>
-                <artifactId>postgresql</artifactId>
-                <groupId>org.postgresql</groupId>
-                <scope>runtime</scope>
-                <version>${postgresql.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--    <artifactId>postgresql</artifactId>-->
+            <!--    <groupId>org.postgresql</groupId>-->
+            <!--    <scope>runtime</scope>-->
+            <!--    <version>${postgresql.version}</version>-->
+            <!--</dependency>-->
             <!--liquibase-->
             <!--<dependency>
                 <groupId>org.liquibase</groupId>
@@ -330,57 +293,6 @@
                 <version>${liquibase.version}</version>
             </dependency>-->
             <!--数据库相关依赖结束-->
-
-            <!--flowable-->
-            <!--flowable-spring-->
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter-process</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-idm-spring-configurator</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <!--flowable-json-converter-->
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-json-converter</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <!--flowable-->
-            <!-- flowable UI集成 -->
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-modeler-rest</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-modeler-logic</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-modeler-conf</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-idm-conf</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-idm-rest</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
 
             <!--其他公共依赖开始-->
             <!-- commons -->
@@ -408,11 +320,6 @@
                 <artifactId>commons-logging</artifactId>
                 <groupId>commons-logging</groupId>
                 <version>${commons-logging.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>commons-discovery</artifactId>
-                <groupId>commons-discovery</groupId>
-                <version>${commons-discovery.version}</version>
             </dependency>
             <dependency>
                 <artifactId>commons-net</artifactId>
@@ -467,12 +374,6 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <groupId>javax.servlet</groupId>
                 <version>${javax.version}</version>
-            </dependency>
-            <!-- java-websocket -->
-            <dependency>
-                <artifactId>Java-WebSocket</artifactId>
-                <groupId>org.java-websocket</groupId>
-                <version>${java-websocket.version}</version>
             </dependency>
             <!-- redisson -->
             <dependency>
@@ -626,11 +527,11 @@
                 <groupId>javax.xml.bind</groupId>
                 <version>${jaxb-api.version}</version>
             </dependency>
-            <dependency>
-                <artifactId>cglib</artifactId>
-                <groupId>cglib</groupId>
-                <version>${cglib.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--    <artifactId>cglib</artifactId>-->
+            <!--    <groupId>cglib</groupId>-->
+            <!--    <version>${cglib.version}</version>-->
+            <!--</dependency>-->
             <!--lombok-->
             <dependency>
                 <artifactId>lombok</artifactId>
@@ -638,30 +539,44 @@
                 <version>${lombok.version}</version>
             </dependency>
             <!--mapstruct-->
-            <dependency>
-                <artifactId>mapstruct</artifactId>
-                <groupId>org.mapstruct</groupId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>mapstruct-processor</artifactId>
-                <groupId>org.mapstruct</groupId>
-                <version>${mapstruct.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--    <groupId>org.mapstruct</groupId>-->
+            <!--    <artifactId>mapstruct</artifactId>-->
+            <!--    <version>${mapstruct.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--    <groupId>org.mapstruct</groupId>-->
+            <!--    <artifactId>mapstruct-processor</artifactId>-->
+            <!--    <version>${mapstruct.version}</version>-->
+            <!--</dependency>-->
             <!--其他公共依赖结束-->
         </dependencies>
     </dependencyManagement>
 
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>release</name>
+            <url>https://nexus.njydsz.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>snapshot</name>
+            <url>https://nexus.njydsz.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.9.0</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-                <groupId>org.apache.maven.plugins</groupId>
             </plugin>
         </plugins>
     </build>
