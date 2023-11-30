@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.startdis.sys.infra.mapper.UserMapper">
+
+    <select id="listPage" parameterType="com.startdis.sys.domain.model.query.UserQuery"
+            resultType="com.startdis.sys.domain.model.vo.UserVO">
+        select
+        <if test="item.deptName != null and item.deptName != ''">
+            d.id as dept_id,
+            d.dept_name,
+        </if>
+        <if test="item.postName != null and item.postName != ''">
+            p.id as post_id,
+            p.post_name,
+        </if>
+        <if test="item.roleName != null and item.roleName != ''">
+            r.id as role_id,
+            r.role_name,
+        </if>
+        u.*
+        from
+        <if test="item.deptName != null and item.deptName != ''">
+            sys_dept d,
+            sys_user_dept ud,
+        </if>
+        <if test="item.postName != null and item.postName != ''">
+            sys_post P,
+            sys_user_post up,
+        </if>
+        <if test="item.roleName != null and item.roleName != ''">
+            sys_role r,
+            sys_user_role ur,
+        </if>
+        sys_user u
+        <where>
+            <if test="item.userCode != null and item.userCode != ''">
+                and u.user_code = #{item.userCode}
+            </if>
+            <if test="item.userName != null and item.userName != ''">
+                and u.user_name = #{item.userName}
+            </if>
+            <if test="item.status != null and item.status != ''">
+                and u.status = #{item.status}
+            </if>
+            <if test="item.deptName != null and item.deptName != ''">
+                and u.id = ud.user_id
+                and ud.dept_id = d.id
+                and d.dept_name = #{item.deptName}
+            </if>
+            <if test="item.postName != null and item.postName != ''">
+                and u.id = up.user_id
+                and up.post_id = p.id
+                and p.post_name = #{item.postName}
+            </if>
+            <if test="item.roleName != null and item.roleName != ''">
+                and u.id = ur.user_id
+                and ur.role_id = r.id
+                and r.role_name = #{item.roleName}
+            </if>
+        </where>
+    </select>
+
+    <select id="countPage" parameterType="com.startdis.sys.domain.model.query.UserQuery" resultType="int">
+        select
+        count(0)
+        from
+        <if test="item.deptName != null and item.deptName != ''">
+            sys_dept d,
+            sys_user_dept ud,
+        </if>
+        <if test="item.postName != null and item.postName != ''">
+            sys_post P,
+            sys_user_post up,
+        </if>
+        <if test="item.roleName != null and item.roleName != ''">
+            sys_role r,
+            sys_user_role ur,
+        </if>
+        sys_user u
+        <where>
+            <if test="item.userCode != null and item.userCode != ''">
+                and u.user_code = #{item.userCode}
+            </if>
+            <if test="item.userName != null and item.userName != ''">
+                and u.user_name = #{item.userName}
+            </if>
+            <if test="item.status != null and item.status != ''">
+                and u.status = #{item.status}
+            </if>
+            <if test="item.deptName != null and item.deptName != ''">
+                and u.id = ud.user_id
+                and ud.dept_id = d.id
+                and d.dept_name = #{item.deptName}
+            </if>
+            <if test="item.postName != null and item.postName != ''">
+                and u.id = up.user_id
+                and up.post_id = p.id
+                and p.post_name = #{item.postName}
+            </if>
+            <if test="item.roleName != null and item.roleName != ''">
+                and u.id = ur.user_id
+                and ur.role_id = r.id
+                and r.role_name = #{item.roleName}
+            </if>
+        </where>
+    </select>
+    <select id="getUserInPms"
+            resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT u.*
+        FROM `sys_user` u
+                 LEFT JOIN sys_user_process_role r ON u.id = r.user_id
+        WHERE r.process_role_dept_id = '8'
+          AND u.company_tenant_id = #{companyTenantId}
+    </select>
+    <select id="getCountryUserInPms"
+            resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT u.*
+        FROM `sys_user` u
+                 LEFT JOIN sys_user_process_role r ON u.id = r.user_id
+        WHERE (r.process_role_dept_id = '16' or r.process_role_dept_id = '22')
+          AND u.company_tenant_id = #{companyTenantId}
+    </select>
+
+    <select id="getLeaderUserByDeptInPms" resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT
+            t5.*
+        FROM sys_process_role_dept t1
+        LEFT JOIN sys_dept t2 ON t1.dept_id = t2.id
+        LEFT JOIN sys_process_role t3 ON t1.process_role_id = t3.id
+        LEFT JOIN sys_user_process_role t4 ON t1.id = t4.process_role_dept_id
+        LEFT JOIN sys_user t5 ON t4.user_id = t5.id
+        WHERE t1.status = 1 AND t3.role_code = 'leader'
+        AND t2.id IN
+        <foreach collection="deptIds" item="deptId" index="index" open="(" close=")" separator=",">
+            #{deptId}
+        </foreach>
+    </select>
+
+    <select id="getProcessApproverInPms"
+            resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT u.*
+        FROM `sys_user` u
+        LEFT JOIN sys_user_process_role r ON u.id = r.user_id
+        WHERE r.process_role_dept_id = #{type}
+        <if test="userId != null and userId != ''">
+            AND u.id = #{userId}
+        </if>
+        AND u.company_tenant_id = #{companyTenantId}
+    </select>
+    <select id="getProcessStartApproverInPms"
+            resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT u.*
+        FROM `sys_user` u
+        LEFT JOIN sys_user_process_role r ON u.id = r.user_id
+        LEFT JOIN sys_user_dept d ON r.user_id = d.user_id
+        WHERE r.process_role_dept_id = #{type}
+        <if test="deptId != null and deptId != ''">
+            AND d.dept_id = #{deptId}
+        </if>
+        AND u.company_tenant_id = #{companyTenantId}
+    </select>
+
+    <select id="page" resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT
+        t1.*,
+        t2.dept_id as deptId,
+        t3.dept_name as deptName,
+        t5.role_name as roleName
+        FROM sys_user t1
+        LEFT JOIN sys_user_dept t2 ON t1.id = t2.user_id
+        LEFT JOIN sys_dept t3 ON t2.dept_id = t3.id
+        LEFT JOIN sys_user_role t4 ON t1.id = t4.user_id
+        LEFT JOIN sys_role t5 ON t4.role_id = t5.id
+        <where>
+            <if test="deptId != null and deptId != ''">
+                t2.dept_id = #{deptId}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND t1.user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="companyId != null and companyId != ''">
+                AND t3.company_id = #{companyId}
+            </if>
+        </where>
+        GROUP BY t1.id
+    </select>
+
+    <select id="getHeadUserByDeptInPms" resultType="com.startdis.sys.domain.model.vo.UserVO">
+        SELECT t4.*
+        FROM sys_process_role_dept t1
+        LEFT JOIN sys_process_role t2 ON t1.process_role_id = t2.id
+        LEFT JOIN sys_user_process_role t3 ON t1.id = t3.process_role_dept_id
+        LEFT JOIN sys_user t4 ON t3.user_id = t4.id
+        WHERE t1.dept_id = #{deptId} AND t1.`status` = 1 AND t2.role_code = 'head'
+    </select>
+</mapper>
+

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.startdis.comm.swagger.aspect.SwaggerAutoConfiguration,\
+  com.startdis.comm.swagger.aspect.SwaggerWebConfiguration,\
+  com.startdis.comm.swagger.aspect.SwaggerBeanPostProcessor

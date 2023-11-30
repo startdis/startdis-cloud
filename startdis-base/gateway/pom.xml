@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>gateway</artifactId>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+            <!--<resources>-->
+            <!--    <resource>-->
+            <!--        <directory>src/main/java</directory>-->
+            <!--        <includes>-->
+            <!--            <include>**/*.xml</include>-->
+            <!--            <include>**/*.properties</include>-->
+            <!--            <include>**/*.yml</include>-->
+            <!--        </includes>-->
+            <!--    </resource>-->
+            <!--    <resource>-->
+            <!--        <directory>src/main/resources</directory>-->
+            <!--    </resource>-->
+            <!--</resources>-->
+        </plugins>
+    </build>
+    <dependencies>
+        <!-- 原因：该版本SpringCloud不再默认优先加载bootstrap.yml文件，解决办法：添加spring-cloud-starter-bootstrap依赖 -->
+        <dependency>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+        </dependency>
+        
+        <!--gateway-->
+        <dependency>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+        </dependency>
+        
+        <!--Nacos-注册中心-->
+        <dependency>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+        </dependency>
+        
+        <!--Nacos-配置中心-->
+        <dependency>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+        </dependency>
+        
+        <!--防刷限流-->
+        <dependency>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+        </dependency>
+        
+        <dependency>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+        </dependency>
+        
+        <dependency>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+            <groupId>com.alibaba.csp</groupId>
+        </dependency>
+        
+        <!--负载均衡-->
+        <!--由于springcloud2020弃用了Ribbon，
+        因此Alibaba在2021版本nacos中删除了Ribbon的jar包，
+        因此无法通过lb路由到指定微服务，出现了503情况。
+        所以只需要引入springcloud loadbalancer包即可-->
+        <dependency>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+        </dependency>
+        
+        <!--健康监控-->
+        <dependency>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        
+        <!--swagger-->
+        <!--<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>-->
+        
+        <!--comm-util-->
+        <dependency>
+            <artifactId>comm-util</artifactId>
+            <groupId>com.startdis</groupId>
+        </dependency>
+        
+        <!--fastjson-->
+        <dependency>
+            <artifactId>fastjson</artifactId>
+            <groupId>com.alibaba</groupId>
+        </dependency>
+        
+        <!--skywalking-trace-->
+        <dependency>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <groupId>org.apache.skywalking</groupId>
+        </dependency>
+        
+        <!--lombok-->
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+        </dependency>
+    </dependencies>
+    <description>gateway</description>
+    <modelVersion>4.0.0</modelVersion>
+    
+    
+    <name>base-gateway</name>
+    
+    <parent>
+        <artifactId>startdis-base</artifactId>
+        <groupId>com.startdis</groupId>
+        <version>1.0.0</version>
+    </parent>
+    
+    <version>${startdis.version}</version>
+</project>

@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.startdis.comm.core.config.AuthFilterConfig,\
+  com.startdis.comm.core.spring.SpringProperties,\
+  com.startdis.comm.core.spring.SpringBeans
+
+  

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>sys-server</name>
+    <artifactId>sys-server</artifactId>
+    <description>sys-server</description>
+    <version>${startdis.version}</version>
+
+    <parent>
+        <groupId>com.startdis</groupId>
+        <artifactId>tdcd-sys</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <dependencies>
+        <!--公共模块依赖-->
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-minio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>sso-api</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.startdis</groupId>-->
+<!--            <artifactId>comm-websocket</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.startdis</groupId>-->
+<!--            <artifactId>comm-saprfc</artifactId>-->
+<!--        </dependency>-->
+        <!--内部模块依赖-->
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>sys-infra</artifactId>
+        </dependency>
+        <!--nacos-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--easyexcel-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>

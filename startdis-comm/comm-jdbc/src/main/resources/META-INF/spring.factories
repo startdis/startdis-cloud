@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ com.startdis.comm.jdbc.config.MybatisPlusConfig,\
+ com.startdis.comm.jdbc.config.AutoConfig,\
+ com.startdis.comm.jdbc.config.DruidConfig
+
+

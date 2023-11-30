@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>comm-minio</name>
+    <artifactId>comm-minio</artifactId>
+    <description>comm-minio</description>
+    <version>${startdis.version}</version>
+
+    <parent>
+        <groupId>com.startdis</groupId>
+        <artifactId>startdis-comm</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <dependencies>
+        <!--comm-core-->
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-core</artifactId>
+        </dependency>
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--minio-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <!-- slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

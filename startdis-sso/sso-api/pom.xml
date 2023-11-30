@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>sso-api</name>
+    <artifactId>sso-api</artifactId>
+    <description>sso-api</description>
+    <version>${startdis.version}</version>
+
+    <parent>
+        <groupId>com.startdis</groupId>
+        <artifactId>startdis-sso</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>comm-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>sys-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.startdis</groupId>
+            <artifactId>sso-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>startdis-base</artifactId>
+    <description>tdcd-base</description>
+    <modelVersion>4.0.0</modelVersion>
+    <name>tdcd-base</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>tdcd-cloud</artifactId>
+        <groupId>com.startdis</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modules>
+        <!--<module>nacos</module>-->
+        <module>gateway</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

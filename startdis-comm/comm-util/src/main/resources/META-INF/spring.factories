@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.startdis.comm.util.http.OkHttpUtils,\
+  com.startdis.comm.util.config.SnowflakeConfig
+
+  
