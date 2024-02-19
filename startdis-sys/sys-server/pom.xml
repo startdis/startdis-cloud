@@ -9,7 +9,7 @@
 
     <parent>
         <groupId>com.startdis</groupId>
-        <artifactId>tdcd-sys</artifactId>
+        <artifactId>startdis-sys</artifactId>
         <version>1.0.0</version>
     </parent>
 
